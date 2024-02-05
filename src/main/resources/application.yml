@@ -1,0 +1,72 @@
+server:
+  port: 4200
+spring:
+  profiles:
+    active: prod
+  servlet:
+    multipart:
+      max-file-size: 500KB
+      max-request-size: 500KB
+      enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+      username: root
+      password:
+      url: jdbc:mysql://localhost:3306/mydb
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+welcome:
+    message: welcome to my chuongvo dz1012!
+
+---
+spring:
+  config:
+    activate:
+      on-profile: qa
+  datasource:
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mydb-qa
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+welcome:
+  message: welcome to my chuongvo dz1012!
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+                   #ngoại trừ 2 cái này
+
+      discovery:
+        enabled: true
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3306/mydb-prod
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+welcome:
+  message: welcome to my chuongvo dz1012!
+---
